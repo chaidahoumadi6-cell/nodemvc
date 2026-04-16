@@ -1,0 +1,23 @@
+{
+  "name": "nodemvc",
+  "version": "1.0.0",
+  "description": "",
+  "homepage": "https://github.com/chaidahoumadi6-cell/nodemvc#readme",
+  "bugs": {
+    "url": "https://github.com/chaidahoumadi6-cell/nodemvc/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chaidahoumadi6-cell/nodemvc.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "myserver.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "express": "^5.2.1"
+  }
+}
