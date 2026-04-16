@@ -1,7 +1,8 @@
 /** Ce fichier est un contrôleur
- *  Dans ce fichier je créer les routes de la page accueil.ejs
+ *  Dans ce fichier je créer la logique de la page accueil.ejs
 */
-
-const express = require("express");
-
-const router = express.Router();
+module.exports = {
+    accueilView: (req, res) => {
+        res.render('accueil');
+    }
+}

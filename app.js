@@ -2,8 +2,20 @@
 
 const express = require("express");
 
+// J'importe la route accueilRoute
+const accueilRoute = require("./routes/accueilRoute");
+
 // J' initie l' aplication express
 const app = express();
+
+// Définit le dossier où se trouvent les fichiers de views
+app.set("views", "./views");
+
+// Définit le moteur de template utilisé (ici EJS)
+app.set("view engine", "ejs");
+
+// Utilise le routeur accueilRoute pour gérer les routes à partir de "/"
+app.use("/",accueilRoute);
 
 // Exporte l'application pour l'utiliser dans d'autres fichiers
 module.exports = app;
