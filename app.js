@@ -2,7 +2,14 @@
 
 const express = require("express");
 
-// J'importe la route accueilRoute
+// Import mysql2
+const mysql2 = require("mysql2");
+
+// Import express connection
+const myconnection = require('express-myconnection');
+
+
+// J'importe la route Accueil Route
 const accueilRoute = require("./routes/accueilRoute");
 const authlRoute = require("./routes/authentificationRoute");
 
@@ -15,7 +22,20 @@ app.set("views", "./views");
 // Définit le moteur de template utilisé (ici EJS)
 app.set("view engine", "ejs");
 
-// Utilise le routeur accueilRoute pour gérer les routes à partir de "/"
+app.use(express.static('public'));
+
+// Configurer la connection à la base de données
+const optionsConnexioBaseDeDonnees = {
+    host: "localhost",
+    user: "root",
+    password: "Hakim02112006",
+    database: "maygourmet",
+    port: 3306
+};
+
+app.use(myconnection(mysql2, optionsConnexioBaseDeDonnees, 'pool'));
+
+// Utilise le routeur A  ccueil Route pour gérer les routes à partir de "/"
 app.use("/",accueilRoute);
 // Ici je laisse la route à "/", pui dans authentification controller.js je précise la route get("/authRoute")
 app.use("/", authlRoute);

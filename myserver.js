@@ -1,4 +1,4 @@
-// Le fichier myserver.js à pour mission de créer le serveur de l'application
+// Le fichier myserver.js a pour mission de créer le serveur de l'application
 
 // J'importe le package HTTP
 const http = require("http");
@@ -6,7 +6,7 @@ const http = require("http");
 // J'importe l' application app.js
 const app = require("./app");
 
-// Je créer un serveur
+// Je crée un serveur
 const serveur = http.createServer(app);
 
 const numeroport = 3009

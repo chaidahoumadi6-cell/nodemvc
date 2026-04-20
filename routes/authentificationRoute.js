@@ -8,5 +8,6 @@ const router = express.Router();
 
 router.get("/register", authController.registerView);
 
-// J'exporte le "router" pour le rendre 
+router.post("/register", authController.registerUser);
+// J'exporte le "router" pour le rendre accessible depuis d'autres fichier
 module.exports = router;
