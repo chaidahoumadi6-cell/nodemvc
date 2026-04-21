@@ -8,5 +8,23 @@
 <body>
     <%- include("navbar") -%>
     <h1>Authentification</h1>
+
+    <form action="/register" method="post">
+        <div class="container">
+            <h3> S'enregistrer </h3>
+            <p> Veuillez Compléter tous les champs</p>
+
+            <hr>  <!-- Insérer une ligne horizontale -->
+            <!-- Zone de saisie d'email -->
+            <label for="">Email</label>
+            <input type="email" name="email" id="email" required>
+
+            <!-- Zone de saisie du mot de passe -->
+             <label for="motdepasse"> Mot de passe </label>
+             <input type="password" name="motdepasse"id="motdepasse" required>
+
+            <button type="submit" required>Enregistrer</button>
+        </div>
+    </form>
 </body>
 </html>
