@@ -9,9 +9,13 @@ const mysql2 = require("mysql2");
 const myconnection = require('express-myconnection');
 
 
-// J'importe la route Accueil Route
+// J'importe la route Accueil Route.js
 const accueilRoute = require("./routes/accueilRoute");
+
+// J' importe la rout authentificationRoute.js
 const authlRoute = require("./routes/authentificationRoute");
+
+const db = require("./models");
 
 // J' initie l' aplication express
 const app = express();
@@ -22,18 +26,20 @@ app.set("views", "./views");
 // Définit le moteur de template utilisé (ici EJS)
 app.set("view engine", "ejs");
 
+// Utiliser les fichiers statiques qui sont dans le dossier public
 app.use(express.static('public'));
 
-// Configurer la connection à la base de données
-const optionsConnexioBaseDeDonnees = {
-    host: "localhost",
-    user: "root",
-    password: "Hakim02112006",
-    database: "maygourmet",
-    port: 3306
-};
+// Extrair les données saisise dans le formulaire
+app.use(express.urlencoded({extended: false}));
 
-app.use(myconnection(mysql2, optionsConnexioBaseDeDonnees, 'pool'));
+db.sequelize.sync({force: true}).then(() => {
+    console.log("sync db");
+}).catch((err) => {
+    console.log("Failed to sync db :" + err.message);
+});
+
+
+//app.use(myconnection(mysql2, optionsConnexioBaseDeDonnees, 'pool'));
 
 // Utilise le routeur A  ccueil Route pour gérer les routes à partir de "/"
 app.use("/",accueilRoute);

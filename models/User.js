@@ -6,9 +6,24 @@
 const DataTypes = require("sequelize");
 
 const sequelize = require("../db");
-const { Types } = require("mysql2");
+//const { Types } = require("mysql2");
 
-module.exports = sequelize.define(
+
+module.exports = (sequelize,Sequelize) => {
+    const UserModel = sequelize.define("user", {
+        email: {
+            type: Sequelize.STRING,
+            unique: true
+        },
+        password: {
+            type: Sequelize.STRING
+        }
+    });
+
+    return UserModel;
+}
+
+/*module.exports = sequelize.define(
     'user', {
         id: {
             Type: DataTypes.INTEGER,
@@ -23,4 +38,4 @@ module.exports = sequelize.define(
             Type: DataTypes.STRING,
         }
     }
-);
+);*/
