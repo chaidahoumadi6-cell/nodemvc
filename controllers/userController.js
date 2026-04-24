@@ -1,3 +1,4 @@
+const { where } = require("sequelize");
 const db = require("../models");
 const User = db.user;
 const Op = db.sequelize.Op;
@@ -77,4 +78,68 @@ exports.findAll = (req,res) => {
                 message: err.message || "erreur lors de la récupèration de tous les utilisateurs."
             });
         });
-}
+};
+
+// user/:id
+// Exemple de route compléte : localhost:3009/users/1. Je supprime la ligne dont l'id = 1
+exports.delete = (req, res) => {
+    // Je récupérer l'id saisi dans la route complète. L'id est disponible dans req.params.id et je stocke l'id récupèrer dans la variable idUser
+    const idUser = req.params.id;
+
+    User.destroy({
+        where: {id: idUser}
+    }). then(num => {
+        if(num == 1){
+            res.send({
+                message: "utilisateur à été supprimer avec succès"
+            });
+        } else {
+            res.send({
+                message: `Impossible de supprimer l'utilisateur dont l'id est ${idUser}. peut-être que l'utilisateurnn'existe pas.`
+            });
+        }
+    }).catch(err => {
+        res.status(500).send({
+            message:  `Impossible de supprimer l'utilisateur dont l'id est ${idUser}`+ err.message
+        });
+    });
+};
+
+exports.deleteAll = (req,res) => {
+   User.destroy({
+    where:{},
+    truncate: false
+   }).then(num => {
+        res.send({
+            message: `${num} Tous les utilisateur ont été supprimer`
+        })
+   }).catch(err => {
+        res.status(500).send({
+            message: err.message || "Echec.Une erreur est survenue lors de la suppression de tous les utilisateurs"
+        })
+   });
+};
+
+// Mettre à jour les données d'un utilisateur 
+
+exports.update = (req, res) => {
+    const idUser = req.params.id;
+
+    User.update(req.body, {
+        where: {id: idUser}
+    }).then(num => {
+        if(num == 1) {
+            res.send({
+                message: "Utilisateur mis à jour avec succés"
+            })
+        } else {
+            res.send({
+                message: ` L'utilisateur avec l'id ${idUser} n'a pas pu être mis à jour.peu-être qu'il n'existe pas. `
+            })
+        }
+    }).catch(err => {
+        res.status(500).send({
+            message: " Impossible de mettre à jour l'utilisatuer dont l'id est"+ idUser
+        });
+    });
+};
